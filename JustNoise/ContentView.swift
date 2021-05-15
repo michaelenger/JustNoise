@@ -8,9 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isNoisy: Bool = false
+    
     var body: some View {
-        Text("Hello, world!")
+        VStack {
+            Button(action: toggleNoise) {
+                Text(isNoisy ? "Stop" : "Start Noise")
+            }
             .padding()
+            .background(Color(UIColor.systemIndigo))
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            Spacer()
+        }
+        .padding()
+    }
+    
+    func toggleNoise() {
+        self.isNoisy.toggle()
     }
 }
 
