@@ -22,6 +22,16 @@ struct ContentView: View {
             .background(Color(UIColor.systemIndigo))
             .foregroundColor(.white)
             .cornerRadius(8)
+            
+            Button(action: toggleEQ) {
+                Text("Toggle EQ")
+                    .padding()
+                    .frame(maxWidth:.infinity)
+            }
+            .background(Color(UIColor.systemIndigo))
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            
             Spacer()
         }
         .padding()
@@ -35,6 +45,10 @@ struct ContentView: View {
         }
 
         self.isNoisy.toggle()
+    }
+    
+    func toggleEQ() {
+        noiseMaker.toggleEQ()
     }
 }
 
