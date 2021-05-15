@@ -10,12 +10,15 @@ import SwiftUI
 struct ContentView: View {
     @State private var isNoisy: Bool = false
     
+    private let noiseMaker = NoiseMaker()
+    
     var body: some View {
         VStack {
             Button(action: toggleNoise) {
                 Text(isNoisy ? "Stop" : "Start Noise")
+                    .padding()
+                    .frame(maxWidth:.infinity)
             }
-            .padding()
             .background(Color(UIColor.systemIndigo))
             .foregroundColor(.white)
             .cornerRadius(8)
@@ -25,6 +28,12 @@ struct ContentView: View {
     }
     
     func toggleNoise() {
+        if (isNoisy) {
+            noiseMaker.stop()
+        } else {
+            noiseMaker.start()
+        }
+
         self.isNoisy.toggle()
     }
 }
