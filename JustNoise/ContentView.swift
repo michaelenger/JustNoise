@@ -14,14 +14,18 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            GainSlider(value: 0, frequency: 3200, onGainChanged: onGainChanged)
+            HStack {
+                ForEach(noiseMaker.frequencies, id: \.self) { frequency in
+                    GainSlider(value: 0, frequency: frequency, onGainChanged: onGainChanged)
+                }
+            }
             
             Button(action: toggleNoise) {
-                Text(isNoisy ? "Stop" : "Start Noise")
+                Text(isNoisy ? "Be Quiet" : "Make Noise")
                     .padding()
                     .frame(maxWidth:.infinity)
             }
-            .background(Color(UIColor.systemIndigo))
+            .background(Color(UIColor.systemBlue))
             .foregroundColor(.white)
             .cornerRadius(8)
             
@@ -34,15 +38,22 @@ struct ContentView: View {
         if (isNoisy) {
             noiseMaker.stop()
         } else {
-            noiseMaker.start()
+            do {
+                try noiseMaker.start()
+            } catch {
+                print("Failed to start engine: \(error)")
+            }
         }
 
         self.isNoisy.toggle()
     }
     
     func onGainChanged(_ frequency: Float, _ gain: Float) {
-        print("\(frequency) changed to \(gain)")
-        self.noiseMaker.changeGain(frequency: frequency, gain: gain)
+        do {
+            try self.noiseMaker.changeGain(frequency: frequency, gain: gain)
+        } catch {
+            print("Cannot update gain: \(error)")
+        }
     }
 }
 

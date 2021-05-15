@@ -8,10 +8,18 @@
 import Foundation
 import AVFoundation
 
+enum NoiseMakerError: Error {
+    /// Thrown when a band with that frequency doesn't exist.
+    case invalidFrequency(frequency: Float)
+}
+
 /// A means to make noise.
 class NoiseMaker {
     private let engine: AVAudioEngine
     private let equaliser: AVAudioUnitEQ
+    public let frequencies: [Float] = [
+        80, 160, 250, 500, 900, 1500, 2500, 3200
+    ]
 
     /// Generate sample.
     /// - Returns A PCM sample.
@@ -22,7 +30,7 @@ class NoiseMaker {
     /// Create the noise maker.
     public init() {
         engine = AVAudioEngine()
-        equaliser = AVAudioUnitEQ(numberOfBands: 1)
+        equaliser = AVAudioUnitEQ(numberOfBands: frequencies.count)
         
         let amplitude = Float(0.5) // TODO Make this configurable?
         
@@ -54,12 +62,14 @@ class NoiseMaker {
         engine.attach(sourceNode)
         
         // Setup equaliser
-        let band = self.equaliser.bands[0]
-        band.bypass = false
-        band.frequency = 3200
-        band.filterType = .parametric
-        band.gain = 0
-        band.bandwidth = 0.05
+        for (i, frequency) in frequencies.enumerated() {
+            let band = self.equaliser.bands[i]
+            band.bypass = false
+            band.frequency = frequency
+            band.filterType = .parametric
+            band.gain = 0
+            band.bandwidth = 0.05
+        }
         
         engine.attach(self.equaliser)
 
@@ -72,12 +82,8 @@ class NoiseMaker {
     }
     
     /// Start making noise.
-    public func start() {
-        do {
-            try engine.start()
-        } catch {
-            print("Failed to start engine: \(error)")
-        }
+    public func start() throws {
+        try engine.start()
     }
     
     /// Stop making noise.
@@ -88,8 +94,17 @@ class NoiseMaker {
     /// Change the gain of a specific frequency.
     /// - Parameter frequency: The frequency to change the gain value for.
     /// - Parameter gain: New gain value.
-    public func changeGain(frequency: Float, gain: Float) {
-        let band = self.equaliser.bands[0]
-        band.gain = gain
+    public func changeGain(frequency: Float, gain: Float) throws {
+        for (i, bandFrequency) in frequencies.enumerated() {
+            if frequency == bandFrequency {
+                let band = self.equaliser.bands[i]
+                band.gain = gain
+                return
+            }
+        }
+        
+        throw NoiseMakerError.invalidFrequency(frequency: frequency)
+
+        
     }
 }
