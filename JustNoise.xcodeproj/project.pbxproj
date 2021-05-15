@@ -14,6 +14,7 @@
 		391E175726500E1D002EDA8A /* JustNoiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E175626500E1D002EDA8A /* JustNoiseTests.swift */; };
 		391E176226500E1D002EDA8A /* JustNoiseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 391E176126500E1D002EDA8A /* JustNoiseUITests.swift */; };
 		398360AB2650453C0042ECA6 /* NoiseMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398360AA2650453C0042ECA6 /* NoiseMaker.swift */; };
+		398360AF2650727A0042ECA6 /* GainSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398360AE2650727A0042ECA6 /* GainSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		391E176126500E1D002EDA8A /* JustNoiseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustNoiseUITests.swift; sourceTree = "<group>"; };
 		391E176326500E1D002EDA8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		398360AA2650453C0042ECA6 /* NoiseMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseMaker.swift; sourceTree = "<group>"; };
+		398360AE2650727A0042ECA6 /* GainSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				391E174D26500E1D002EDA8A /* Info.plist */,
 				391E174A26500E1D002EDA8A /* Preview Content */,
 				398360AA2650453C0042ECA6 /* NoiseMaker.swift */,
+				398360AE2650727A0042ECA6 /* GainSlider.swift */,
 			);
 			path = JustNoise;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				398360AF2650727A0042ECA6 /* GainSlider.swift in Sources */,
 				391E174726500E17002EDA8A /* ContentView.swift in Sources */,
 				398360AB2650453C0042ECA6 /* NoiseMaker.swift in Sources */,
 				391E174526500E17002EDA8A /* JustNoiseApp.swift in Sources */,

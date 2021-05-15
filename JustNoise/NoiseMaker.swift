@@ -56,7 +56,7 @@ class NoiseMaker {
         // Setup equaliser
         let band = self.equaliser.bands[0]
         band.bypass = false
-        band.frequency = 3000
+        band.frequency = 3200
         band.filterType = .parametric
         band.gain = 0
         band.bandwidth = 0.05
@@ -85,9 +85,11 @@ class NoiseMaker {
         engine.stop()
     }
     
-    /// Toggle the EQ thing on or off
-    public func toggleEQ() {
+    /// Change the gain of a specific frequency.
+    /// - Parameter frequency: The frequency to change the gain value for.
+    /// - Parameter gain: New gain value.
+    public func changeGain(frequency: Float, gain: Float) {
         let band = self.equaliser.bands[0]
-        band.gain = band.gain == 0 ? -100 : 0
+        band.gain = gain
     }
 }

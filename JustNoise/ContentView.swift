@@ -14,17 +14,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            GainSlider(value: 0, frequency: 3200, onGainChanged: onGainChanged)
+            
             Button(action: toggleNoise) {
                 Text(isNoisy ? "Stop" : "Start Noise")
-                    .padding()
-                    .frame(maxWidth:.infinity)
-            }
-            .background(Color(UIColor.systemIndigo))
-            .foregroundColor(.white)
-            .cornerRadius(8)
-            
-            Button(action: toggleEQ) {
-                Text("Toggle EQ")
                     .padding()
                     .frame(maxWidth:.infinity)
             }
@@ -47,8 +40,9 @@ struct ContentView: View {
         self.isNoisy.toggle()
     }
     
-    func toggleEQ() {
-        noiseMaker.toggleEQ()
+    func onGainChanged(_ frequency: Float, _ gain: Float) {
+        print("\(frequency) changed to \(gain)")
+        self.noiseMaker.changeGain(frequency: frequency, gain: gain)
     }
 }
 
